@@ -1,0 +1,166 @@
+
+#Oppgave 1 og 2
+
+#1      #Lag et program enkel_prediksjon som henter inn alder, kjønn, sivilstatus og mengde gjeld (i kroner) til en person (ved hjelp av input). 
+        # Lagre denne informasjonen i passende variabler.
+        # Kjønn vil være enten tekststrengen “mann” eller “kvinne”, og alder vil være et tall.
+        # Sivilstatus er for enkelhets skyld enten “gift” eller “singel”.
+        # Print en setning som beskriver personen basert på denne informasjonen. Eksem- pel: "Du er en singel mann på 30 år med 100 000 kr i gjeld".
+        # Test at programmet fungerer, dvs. at det skriver ut informasjonen som brukeren gir på rett måte.
+
+#2
+# Filnavn: enkel_prediksjon.py
+        #Vi ønsker nå å skrive et lite program som prøver å predikere om personen vil betale gjelde sin eller ikke. Vi antar følgende:
+        # Alle single menn under 30 år med mer enn 100 000 kroner i gjeld vil ikke betale gjelden sin
+        # Menn under 25 år med mer enn 200 000 kroner i gjeld vil ikke betale gjelden sin, uavhengig av sivilstatus.
+        #  Single kvinner under 28 år med mer enn 300 000 kroner i gjeld vil ikke betale gjelden sin
+        # Alle andre vil betale gjelden sin
+        # Fortsett i prodsedyren enkel_prediksjon som du skrev i forrige oppgave. Skriv if-setninger som basert på antakelsene over vurderer om personen 
+        # vil betale gjelden sin eller ikke. Basert på dette skal det printes enten “vil betale” eller“vil ikke betale”.
+        # Test programmet ditt med ulike verdier. Sjekk for eksempel at det printes “vil ikke betale” hvis du kjører programmet 
+        # med singel mann på 21 år med 120 000 kroner i gjeld.
+
+print("Hva er din sivilstatus?")
+sivilstatus = input("gift/ugift: ")
+print("Hvilket kjønn er du?")
+kjonn = input("mann/kvinne: ")
+print("Hvor gammel er du?")
+alder = int(input("alder: "))
+print("Hvor mye gjeld har du?")
+gjeld = int(input("kr: "))
+print(f'Du er en {sivilstatus} {kjonn} på {alder} år med {gjeld} kr i gjeld')
+    
+if kjonn == "mann" and alder < 30 and gjeld > 100000 and sivilstatus == "singel":
+    print("vil ikke betale")
+elif alder < 25 and gjeld > 200000:
+    print("vil ikke betale")
+elif kjonn == "kvinne" and alder < 28 and gjeld > 300000 and sivilstatus == "singel":
+    print("vil ikke betale")
+else:
+    print("vil betale")
+
+
+
+
+
+#Oppgave 3
+#Filnavn: prediksjon_med_historikk.py
+# Lag et nytt program prediksjon_med_betalingshistorikk. Hent inn alder, kjønn, sivilstatus og mengde gjeld på samme måte som i oppgave 1 
+# (du kan kopiere de linjene med kode).
+# Vi ønsker nå også å hente inn betalingshistorikken fra de forrige tre månedene og legge denne informasjonen i en liste.
+# Lag en tom liste som du skal fylle med betalingshistorikken
+# Hent inn betalingshistorikken for de forrige måned ved hjelp av input (én input for hver mnd, start med forrige mnd, deretter måneden før, til slutt
+# 2 mnd siden)
+# Forventet input hver gang er enten tekststrengen betalt eller ikke_betalt
+# For hver gang du leser inn betalingshistorikken for en gitt måned legger
+#du denne i listen
+# Print til slutt innholdet i listen slik at du kan se at den har blitt fyllt opp som forventet.
+# Implementer den samme prediksjonen som du skrev i oppgave 2 (du kan kopiere koden), men gjør én endring: Prediker alltid at personen ikke vil betale 
+# hvis personen ikke har betalt 2 av de 3 forrige månedene.
+
+
+print("Hva er din sivilstatus?")
+sivilstatus = input("gift/ugift: ")
+print("Hvilket kjønn er du?")
+kjonn = input("mann/kvinne: ")
+print("Hvor gammel er du?")
+alder = int(input("alder: "))
+print("Hvor mye gjeld har du?")
+gjeld = int(input("kr: "))
+
+print(f'Du er en {sivilstatus} {kjonn} på {alder} år med {gjeld} kr i gjeld')
+
+betalingshistorikk = []
+for i in range(3):
+    betalingsstatus = input(f'Betalte brukeren for {i + 1} måneder siden? (betalt/ikke_betalt): ')
+    betalingshistorikk.append(betalingsstatus)
+
+if betalingshistorikk.count("ikke_betalt") > 1:
+    print("vil ikke betale")
+elif kjonn == "mann" and alder < 30 and gjeld > 100000 and sivilstatus == "singel":
+    print("vil ikke betale")
+elif alder < 25 and gjeld > 200000:
+    print("vil ikke betale")
+elif kjonn == "kvinne" and alder < 28 and gjeld > 300000 and sivilstatus == "singel":
+    print("vil ikke betale")
+else:
+    print("vil betale")
+
+
+
+
+
+
+#Oppgave 4
+# Filnavn: prediksjon_med_historikk.py (fortsett på samme kode som i forrige oppgave)
+# Utvid programmet du skrev i oppgave 3 til å også hente inn utdanningsnivå. Ut- danningsnivå skal være en streng som enten er 
+# “ukjent”, “grunnskole”, “hoeyskole” eller “universitet”.
+# Vi ønsker å anta et inntektsnivå basert utdanningsnivået til personen. Vi antar at gjennomsnittlig årsinntekt for de ulike utdanningsnivåene er:
+# Ukjent: 300 000 kr
+# Grunnskole: 260 000 kr • Høyskole: 500 000 kr
+# Universitet: 700 000 kr
+# Denne informasjonen kan vi representere i en ordbok der nøkkel er utdan- ningsnivå og verdiene er inntekten. Opprett en slik ordbok øverst i 
+# programmet prediksjon_med_betalingshistorikk. La nøklene være små bokstaver og bytt ut ø-en i høyskole med oe (hoeyskole).
+# Skriv kode for å lese inn utdanningsnivået ved hjelp av input, og hent ut forventet inntekt ved å gjøre et oppslag i ordboken.
+# Utvid deretter reglene dine slik at du alltid spår “vil betale” hvis personen er mann og har forventet inntekt som er høyere enn 3 ganger gjelden.
+
+
+utdanning = {
+        "ukjent" : 300000,
+        "grunnskole" : 260000,
+        "høyskole" : 500000,
+        "universitet" : 700000,
+}
+
+print("Hva er din sivilstatus?")
+sivilstatus = input("gift/ugift: ")
+print("Hvilket kjønn er du?")
+kjonn = input("mann/kvinne: ")
+print("Hvor gammel er du?")
+alder = int(input("alder: "))
+print("Hvor mye gjeld har du?")
+gjeld = int(input("kr: "))
+print("Hva er din høyeste fullførte utdanning?")
+utdanningsnivå = input("(ukjent/grunnskole/høyskole/universitet): ")
+
+print(f'Du er en {sivilstatus} {kjonn} på {alder} år med {gjeld} kr i gjeld')
+betalingshistorikk = []
+for i in range(3):
+    betalingsstatus = input(f'Betalte brukeren for {i + 1} måneder siden? (betalt/ikke_betalt): ')
+    betalingshistorikk.append(betalingsstatus)
+
+if betalingshistorikk.count("ikke_betalt") > 1:
+    print("vil ikke betale")
+elif kjonn == "mann" and utdanning[utdanningsnivå] > gjeld * 3:
+    print("vil ikke betale")
+elif sivilstatus == "singel" and kjonn == "mann" and alder < 30 and gjeld > 100000:
+    print("vil ikke betale")
+elif kjonn == "mann" and alder < 25 and gjeld > 200000:
+    print("vil ikke betale")
+elif kjonn == "kvinne" and sivilstatus == "singel" and alder < 28 and gjeld > 300000:
+    print("vil ikke betale")
+else:
+    print("vil betale")
+
+
+
+
+#Oppgave 5
+#Filnavn: svartelisting.py
+# I noen tilfeller er ikke prediksjon nødvendig, fordi vi allerede er ganske sikre på
+# hvem vi f. eks ønsker å tilby et lån eller ikke.
+# For eksempel har banker typisk tilgang til lister over personer som ikke skal få lån, basert på tidligere historikk (en slags svarteliste).
+# Lag et nytt program bestem_laan hvor du kun leser inn kunde-ID til en person ved hjelp av input (kunde-ID vil være et tall og må konverteres til int).
+# Anta at du vet at følgende personer personer (identifsert med kunde-ID) mest sannsynlig aldri vil betale gjelden sin, og at disse ikke bør få lån:
+# 23894, 29741, 10961, 22768, 22803
+# Sjekk deretter i programmet bestem_laan om kunde-ID-en som sendes inn matcher en av de svartelistede ID-ene (ved å sjekke om den finnes i mengden), 
+# og print i så fall "kan ikke få lån". Hvis den matcher, print "kan få lån".
+
+svartelisten = [23894, 29741, 10961, 22768, 22803]
+print("Hva er din ID?")
+id = int(input("ID: "))
+if id in svartelisten:
+    print("vil ikke betale")
+else:
+    print("vil betale")
+

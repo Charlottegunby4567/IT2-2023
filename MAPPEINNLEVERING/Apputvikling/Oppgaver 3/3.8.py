@@ -1,3 +1,26 @@
+# UML diagram
+
+# -------------------------------------
+# Trener
+# -------------------------------------
+# - navn : string
+# - pokemonListe : list
+# -------------------------------------
+# + leggTilPokemon(pokemon : Pokemon) : void
+# + fjernPokemon(pokemon : Pokemon) : void
+# + __str__() : string
+# -------------------------------------
+
+# Attributter:
+# navn: En streng som lagrer trenerens navn.
+# pokemonListe: En liste som holder på alle Pokémonene treneren har.
+# Metoder:
+# leggTilPokemon(pokemon): Metoden for å legge til en Pokémon i trenerens liste.
+# fjernPokemon(pokemon): Metoden for å fjerne en Pokémon fra trenerens liste.
+# __str__(): Returnerer en strengrepresentasjon av treneren, inkludert navn og antall Pokémoner de har.
+
+
+
 
 class Trener:
     def __init__(self, navn):
@@ -32,3 +55,9 @@ if __name__ == "__main__":
     ash.fjern_pokemon("Pikachu")
 
     print(ash)  # Skriver ut: Trener Ash har 1 pokemon.
+
+
+# __init__-metoden: Setter opp en ny Trener med et gitt navn og en tom liste for å holde på Pokémoner.
+# leggTilPokemon-metoden: Legger til en gitt Pokemon i trenerens liste og rapporterer handlingen.
+# fjernPokemon-metoden: Fjerner en Pokemon fra listen hvis den eksisterer, og rapporterer handlingen.
+# __str__-metoden: Gir en strengrepresentasjon som viser trenerens navn og antall Pokémon de har.
